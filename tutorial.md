@@ -1,3 +1,22 @@
+# set GCP project ID
+
+## Get project name and id
+```bash
+gcloud projects list
+```
+
+## set GCP project id in environment variable
+replace FIXME to your GCP Project ID
+```bash
+export GOOGLE_CLOUD_PROJECT=FIXME
+```
+
+## set default GCP project
+replace FIXME to your GCP Project ID
+```bash
+gcloud config set project FIXME
+```
+
 # Enable required APIs
 
 ```bash
@@ -52,7 +71,7 @@ mv auth.json gcp-credentials/auth.json
 # Create GKE Cluster
 
 ```bash
-gcloud container --project "$GOOGLE_CLOUD_PROJECT" clusters create "k8s-devops-handson"  \
+gcloud container clusters create "k8s-devops-handson"  \
 --zone "asia-northeast1-c" \
 --enable-autoupgrade \
 --enable-autorepair \
@@ -105,4 +124,11 @@ docker push gcr.io/$GOOGLE_CLOUD_PROJECT/devops-handson:v1
 
 ```bash
 kubectl create -f gke-config/deployment.yaml
+```
+
+# Cleanup
+
+## Unset default GCP project
+```bash
+gcloud config unset project
 ```

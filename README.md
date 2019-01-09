@@ -3,4 +3,4 @@
 
 ## Run tutorial in CloudShell
 
-[![Open this project in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/samuraitaiga/sd-demo.git&page=cloudshell&tutorial=tutorial.md&open_in_editor=tutorial.md)
+[![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fsamuraitaiga%2Fsd-demo.git&cloudshell_open_in_editor=tutorial.md&cloudshell_tutorial=tutorial.md)
