@@ -6,20 +6,47 @@ gcloud services enable cloudbuild.googleapis.com sourcerepo.googleapis.com conta
 
 # Create ServiceAccount and assign IAM Roles
 
+## Create Service Account for this example
 ```bash
 gcloud iam service-accounts create dohandson --display-name "DevOps HandsOn Service Account"
+```
+
+## Create and download Key file for Service Account
+```bash
 gcloud iam service-accounts keys create auth.json --iam-account=dohandson@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com --key-file-type=json
-gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT  --member serviceAccount:dohandson@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com --role roles/clouddebugger.agent
+````
+
+## Add IAM Permission to Service Account
+
+### Cloud Profiler Agent role
+```bash
 gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT  --member serviceAccount:dohandson@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com --role roles/cloudprofiler.agent
+```
+
+### Cloud Trace Agent role
+```bash
 gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT  --member serviceAccount:dohandson@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com --role roles/cloudtrace.agent
+```
+
+### Cloud Monitoring Metric Writer role
+```bash
 gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT  --member serviceAccount:dohandson@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com --role roles/monitoring.metricWriter
+```
+
+### Cloud Monitoring Metadata Writer role
+```bash
 gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT  --member serviceAccount:dohandson@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com --role roles/stackdriver.resourceMetadata.writer
+```
+
+### (Optional)  CloudDebugger Agent role
+```bash
+gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT  --member serviceAccount:dohandson@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com --role roles/clouddebugger.agent
 ```
 
 # Place IAM key file to project directory
 
 ```bash
-mv ~/auth.json ~/sd-demo/gcp-credentials/auth.json
+mv auth.json gcp-credentials/auth.json
 ```
 
 # Create GKE Cluster
@@ -52,22 +79,30 @@ gcloud container clusters get-credentials k8s-devops-handson --zone asia-northea
 
 # Replace FIXME to your GCP project id
 
+## in exapmle app config file
 ```bash
 sed -i".org" -e "s/FIXME/$GOOGLE_CLOUD_PROJECT/g" conf/app.conf
+```
+
+## in k8s config file
+```bash
 sed -i".org" -e "s/FIXME/$GOOGLE_CLOUD_PROJECT/g" gke-config/deployment.yaml
 ```
 
 # Build and Deploy Container
 
+## Build container
 ```bash
-cd ~/sd-demo
 docker build -t gcr.io/$GOOGLE_CLOUD_PROJECT/devops-handson:v1 .
+```
+
+## Push container into container registry
+```bash
 docker push gcr.io/$GOOGLE_CLOUD_PROJECT/devops-handson:v1
 ```
 
 # Deploy container to GKE
 
 ```bash
-cd ~/sd-demo
 kubectl create -f gke-config/deployment.yaml
 ```
