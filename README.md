@@ -1,5 +1,24 @@
 # Stackdriver Trace and Logging example with GKE Container
 
+This is a sample application for quickly try Stackdriver Trace and Logging with Application running on GKE.
+
+## Requirements
+* GCP Account (Billing enabled)
+
+## Specification of this Application
+GCP services, API and Service Account is prepared through Tutorial process below.
+
+* Go 1.11
+* Go libraries
+ * [Beego](https://github.com/astaxie/beego)
+ * [Logrus](https://github.com/sirupsen/logrus)
+ * [OpenCensus](https://opencensus.io/)
+ * [OpenCensus Exporter Stackdriver](https://opencensus.io/exporters/)
+* Stackdriver Trace
+* Stackdriver Logging
+* Stackdriver Profiler
+* GKE
+* GCP Service Account
 
 ## Run tutorial in CloudShell
 

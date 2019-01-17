@@ -76,7 +76,6 @@ gcloud container clusters create "k8s-devops-handson"  \
 --enable-autoupgrade \
 --enable-autorepair \
 --username "admin" \
---cluster-version "1.11.4-gke.8" \
 --machine-type "n1-standard-1" \
 --image-type "COS" \
 --disk-type "pd-standard" \
@@ -93,7 +92,7 @@ gcloud container clusters create "k8s-devops-handson"  \
 # Obtain auth info from GKE cluster
 
 ```bash
-gcloud container clusters get-credentials k8s-devops-handson --zone asia-northeast1-c --project $GOOGLE_CLOUD_PROJECT
+gcloud container clusters get-credentials k8s-devops-handson --zone asia-northeast1-c
 ```
 
 # Replace FIXME to your GCP project id
@@ -132,3 +131,7 @@ kubectl create -f gke-config/deployment.yaml
 ```bash
 gcloud config unset project
 ```
+
+## Delete deployed resources
+
+Please delete GKE cluster, Service Account(dohandson@xxx) if you want
